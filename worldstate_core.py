@@ -19,6 +19,7 @@ from typing import Any, Dict, Iterable, List, Optional
 
 from fissure_mapping import (
     ENTRATI_LAB_SYNDICATES,
+    BOUNTY_POOL,
     HEX_SYNDICATES,
     ITEM_NAME_MAP,
     MISSION_TYPE_MAP,
@@ -1524,6 +1525,7 @@ def format_full_status(data: Dict[str, Any]) -> str:
     return "\n".join(sections)
 
 
+
 def format_anatomy_sanctuary_bounties(data: Dict[str, Any]) -> str:
     import random
     syndicates = get_first(data, "SyndicateMissions", default=[])
@@ -1556,8 +1558,8 @@ def format_anatomy_sanctuary_bounties(data: Dict[str, Any]) -> str:
             title = extract_event_title(get_first(job, "Messages", "messages", default=[]))
             if not title or title == "N/A":
                 title = get_first(job, "title", "Title", "name", "Name", default="未知赏金")
-            requirements = get_first(job, "requirements", "Requirements", "prerequisite", "Prerequisite", default="")
             description = get_first(job, "description", "Description", "objective", "Objective", "goal", "Goal", default="无描述")
+            mission = get_first(job, "mission", "Mission", description)
 
             bounties.append({
                 "level": level,
@@ -1565,13 +1567,13 @@ def format_anatomy_sanctuary_bounties(data: Dict[str, Any]) -> str:
                 "node": normalize_node_name(node),
                 "mission_type": mission_type,
                 "title": title.strip(),
-                "requirements": requirements.strip(),
+                "mission": mission.strip(),
                 "description": description.strip(),
             })
     else:
         # API无数据时使用本地随机生成，基于Seed保证同轮换周期内容一致
         rng = random.Random(seed)
-        # 从NODE_METADATA获取SolNode715-721共7个节点，7选5不重复，按等级升序匹配难度
+        # 从NODE_METADATA获取SolNode715-721共7个节点，7选5不重复
         node_ids = [f"SolNode{i}" for i in range(715, 722)]
         node_pool = []
         for nid in node_ids:
@@ -1579,48 +1581,61 @@ def format_anatomy_sanctuary_bounties(data: Dict[str, Any]) -> str:
             node_pool.append({
                 "name": meta.get("name", nid),
                 "mission_type": meta.get("mission", "未知"),
-                "min_level": meta.get("level", [0, 0])[0],
-                "max_level": meta.get("level", [0, 0])[1],
             })
-        selected_nodes = sorted(rng.sample(node_pool, 5), key=lambda x: x["min_level"])
+        selected_nodes = rng.sample(node_pool, 5)
+        # 筛选所有解剖圣所的赏金
+        anatomy_bounties = [b for b in BOUNTY_POOL if b.get("region") == "EntratiLab"]
+        # 固定等级和声望对应关系
+        fixed_config = [
+            {"level_range": "55-60", "standing": 1000},
+            {"level_range": "65-70", "standing": 2000},
+            {"level_range": "75-80", "standing": 3000},
+            {"level_range": "95-100", "standing": 4000},
+            {"level_range": "115-120", "standing": 5000},
+        ]
         # 按难度等级1-5分别选对应的EntratiLab类型赏金
         for level in range(1, 6):
             # 筛选对应难度的EntratiLab赏金，随机选1个
-            level_bounties = [b for b in ENTRATI_LAB_BOUNTY_POOL if b["level"] == level and b["type"] == "EntratiLab"]
+            level_bounties = [b for b in anatomy_bounties if b.get("level", level) == level]
+            if not level_bounties:
+                level_bounties = anatomy_bounties
             bounty = rng.choice(level_bounties)
             node = selected_nodes[level-1]
+            # 读取赏金中的字段，不存在则用默认值
+            mission = bounty.get("mission", bounty.get("objective", "无明确目标"))
             
+            config = fixed_config[level-1]
             bounties.append({
                 "level": level,
-                "standing": bounty["standing"],
+                "standing": config["standing"],
                 "node": node["name"],
                 "mission_type": node["mission_type"],
-                "level_range": f"{node['min_level']}-{node['max_level']}",
+                "level_range": config["level_range"],
                 "title": bounty["title"],
-                "requirements": bounty["requirements"],
+                "mission": mission,
                 "description": bounty["description"],
             })
 
     lines = []
     lines.append(f"🕒 本轮更新: {activation}")
     lines.append(f"🔄 下次轮换: {expiry} | 剩余: {remaining}")
-    lines.append(f"🔢 本轮换Seed: {seed}")
+    lines.append(f"🔢 本轮Seed: {seed}")
     lines.append("")
     
     for i, bounty in enumerate(bounties, 1):
-        level_range = f" {bounty.get('level_range', '')}级" if 'level_range' in bounty else ""
-        lines.append(f"🏆 赏金 {i} (难度等级 {bounty['level']}{level_range})")
-        lines.append(f"   🎯 名称: {bounty['title']}")
-        lines.append(f"   💰 声望奖励: {bounty['standing']:,}")
-        lines.append(f"   🗺️ 地图: {bounty['node']}")
-        lines.append(f"   ⚔️ 任务类型: {bounty['mission_type']}")
-        if bounty['requirements']:
-            lines.append(f"   📋 准入要求: {bounty['requirements']}")
-        lines.append(f"   📝 任务目标: {bounty['description']}")
-        lines.append("")
+        # 计算钢铁等级和钢铁声望
+        low_lv, high_lv = map(int, bounty['level_range'].split('-'))
+        steel_level = f"{low_lv+100}-{high_lv+100}"
+        steel_standing = int(bounty['standing'] * 1.5)
+        lines.append(f"🏆 任务 {i} | 🟢 等级 {bounty['level_range']} | 💰 声望：{bounty['standing']:,} | 🔴 钢铁等级 {steel_level} | 💰 钢铁声望：{steel_standing:,}")
+        lines.append(f"   🗺️ 任务节点：{bounty['node']}")
+        lines.append(f"   ⚔️ 任务类型：{bounty['mission_type']}")
+        lines.append(f"   🎯 赏金名称：{bounty['title']}")
+        lines.append(f"   📝 赏金目标：{bounty['mission']}")
+        lines.append(f"   💬 赏金描述：{bounty['description']}")
+        lines.append("   --------------------------------------------------")
     
     return render_section("🧪 **解剖圣所赏金任务**", lines, "   当前无可用赏金任务")
-
 def run_query(query: str, data: Dict[str, Any]) -> str:
     normalized = (query or "状态").lower().strip()
     if "原始突击" in normalized or "raw sortie" in normalized:

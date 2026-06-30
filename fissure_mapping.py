@@ -1988,3 +1988,42 @@ HEX_SYNDICATES = {
 
 # 1999 日历/广播军团（用于过滤或单独展示）
 RADIO_LEGION_SYNDICATES = {tag for tag in SYNDICATE_NAMES if tag.startswith("RadioLegion")} | {"NightcapJournalSyndicate"}
+
+# 赏金池
+BOUNTY_POOL = [
+    {
+        "bountyid": "1",
+        "title": "对空防御",
+        "region": "EntratiLab", 
+        "mission": "杀死3个飞行的低语者敌人", # T5
+        "description": "当低语者从上空侵犯我们时，我们不会袖手旁观。干掉它们的空中部队。"
+    },
+    {
+        "bountyid": "2",
+        "title": "大人物",
+        "region": "EntratiLab", 
+        "mission": "消灭2名暴戾虚空锐将", # T1
+        "description": "早该让那些不听话的暴戾虚空锐将看看到底是谁掌控这一地方。把他们大卸八块。"
+    },
+    {
+        "bountyid": "3",
+        "title": "化学课",
+        "region": "EntratiLab", 
+        "mission": "用硫酸泼向30名敌人", 
+        "description": "实验时间！当硫酸与我们的敌人接触时会发生什么？我等着你们的结果。"
+    },
+    {
+        "bountyid": "13",
+        "title": "寂静无声",
+        "region": "EntratiLab", 
+        "mission": "消灭 200 名低语者敌人", # T4
+        "description": "低语者越来越吵闹，我们需要安静才能集中注意力。去吧，让他们闭嘴。永久地。"
+    },
+    {
+        "bountyid": "15",
+        "title": "虚空狂潮",
+        "region": "EntratiLab", 
+        "mission": "激活1个虚空泉脉", # T2
+        "description": "虚空泉脉不可避免地提醒我们，虚空已经渗入实验室。唯一的出路就是接受它们。"
+    },
+]
