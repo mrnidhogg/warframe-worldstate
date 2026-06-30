@@ -1992,66 +1992,80 @@ RADIO_LEGION_SYNDICATES = {tag for tag in SYNDICATE_NAMES if tag.startswith("Rad
 # 赏金池
 BOUNTY_POOL = [
     {
-        "bountyid": "1",
+        "bountyid": "21",
         "title": "对空防御",
         "region": "EntratiLab", 
         "mission": "杀死3个飞行的低语者敌人", # T5
         "description": "当低语者从上空侵犯我们时，我们不会袖手旁观。干掉它们的空中部队。"
     },
     {
-        "bountyid": "2",
+        "bountyid": "22",
         "title": "大人物",
         "region": "EntratiLab", 
-        "mission": "消灭2名暴戾虚空锐将", # T1
+        "mission": "消灭2名暴戾虚空锐将", # T1、T4
         "description": "早该让那些不听话的暴戾虚空锐将看看到底是谁掌控这一地方。把他们大卸八块。"
     },
     {
-        "bountyid": "3",
+        "bountyid": "23",
         "title": "化学课",
         "region": "EntratiLab", 
         "mission": "用硫酸泼向30名敌人", 
         "description": "实验时间！当硫酸与我们的敌人接触时会发生什么？我等着你们的结果。"
     },
     {
-        "bountyid": "5",
+        "bountyid": "25",
         "title": "剔除重型炮兵",
         "region": "EntratiLab", 
         "mission": "推毁24个重型炮兵弱点", # T3
         "description": "爸爸自己设计的一个强大战士；但我看过它的设计图我认为它有几个弱点。验证下我的理论，找出它的弱点并摧毁它。"
     },
     {
-        "bountyid": "6",
+        "bountyid": "26",
         "title": "致命低语",
         "region": "EntratiLab", 
         "mission": "击败嘲讽低语或尖刻低语可能获得的奖励", 
         "description": "爸爸曾写过关于怪异、二重身、低语的自我。找到你内心的黑暗低语并征服它。"
     },
     {
-        "bountyid": "7",
+        "bountyid": "27",
         "title": "疑虑协议",
         "region": "EntratiLab", 
         "mission": "文卷将于20秒后消失", 
         "description": "爸爸的文卷在地面上放置满20秒后会消失。不要拖延。"
     },
     {
-        "bountyid": "13",
+        "bountyid": "33",
         "title": "寂静无声",
         "region": "EntratiLab", 
         "mission": "消灭200名低语者敌人", # T4
         "description": "低语者越来越吵闹，我们需要安静才能集中注意力。去吧，让他们闭嘴。永久地。"
     },
     {
-        "bountyid": "15",
+        "bountyid": "35",
         "title": "虚空狂潮",
         "region": "EntratiLab", 
         "mission": "激活1个虚空泉脉", # T2
         "description": "虚空泉脉不可避免地提醒我们，虚空已经渗入实验室。唯一的出路就是接受它们。"
     },
     {
-        "bountyid": "16",
+        "bountyid": "36",
         "title": "破坏能手",
         "region": "EntratiLab", 
-        "mission": "推毁60个装饰物", # T4
+        "mission": "推毁60个装饰物", # T3、T4
         "description": "低语者在爸爸的实验室里过的太自在了。是时候让他们不舒服了。推毁所有没有固定的东西。不要给它们留下任何重要的东西。"
+    },
+    {
+        "bountyid": "37",
+        "title": "紧张启动",
+        "region": "EntratiLab", 
+        "mission": "在30秒内启动2个导管",
+        "description": "想要征服低语者，你必须先精通一心多用的艺术。在30秒内启动2个导管两次。"
+    },
+    {
+        "bountyid": "38",
+        "title": "火海风暴",
+        "region": "EntratiLab", 
+        "mission": "使用火焰元素瓶击中6名敌人", # T2
+        "description": "火，它能够创造，也能够毁灭。今天，我们来测试火的毁灭力量。"
     },
 ]
