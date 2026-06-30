@@ -1658,7 +1658,7 @@ NODE_METADATA = {
     # SolNode712	Magnacidium, Deimos
     # SolNode713	Exequias, Deimos
     "SolNode715": {
-        "name": "Effervo",
+        "name": "恶涌",
         "planet": "火卫二",
         "faction": "低语者",
         "level": "63-65",
@@ -2013,10 +2013,31 @@ BOUNTY_POOL = [
         "description": "实验时间！当硫酸与我们的敌人接触时会发生什么？我等着你们的结果。"
     },
     {
+        "bountyid": "5",
+        "title": "剔除重型炮兵",
+        "region": "EntratiLab", 
+        "mission": "推毁24个重型炮兵弱点", # T3
+        "description": "爸爸自己设计的一个强大战士；但我看过它的设计图我认为它有几个弱点。验证下我的理论，找出它的弱点并摧毁它。"
+    },
+    {
+        "bountyid": "6",
+        "title": "致命低语",
+        "region": "EntratiLab", 
+        "mission": "击败嘲讽低语或尖刻低语可能获得的奖励", 
+        "description": "爸爸曾写过关于怪异、二重身、低语的自我。找到你内心的黑暗低语并征服它。"
+    },
+    {
+        "bountyid": "7",
+        "title": "疑虑协议",
+        "region": "EntratiLab", 
+        "mission": "文卷将于20秒后消失", 
+        "description": "爸爸的文卷在地面上放置满20秒后会消失。不要拖延。"
+    },
+    {
         "bountyid": "13",
         "title": "寂静无声",
         "region": "EntratiLab", 
-        "mission": "消灭 200 名低语者敌人", # T4
+        "mission": "消灭200名低语者敌人", # T4
         "description": "低语者越来越吵闹，我们需要安静才能集中注意力。去吧，让他们闭嘴。永久地。"
     },
     {
@@ -2025,5 +2046,12 @@ BOUNTY_POOL = [
         "region": "EntratiLab", 
         "mission": "激活1个虚空泉脉", # T2
         "description": "虚空泉脉不可避免地提醒我们，虚空已经渗入实验室。唯一的出路就是接受它们。"
+    },
+    {
+        "bountyid": "16",
+        "title": "破坏能手",
+        "region": "EntratiLab", 
+        "mission": "推毁60个装饰物", # T4
+        "description": "低语者在爸爸的实验室里过的太自在了。是时候让他们不舒服了。推毁所有没有固定的东西。不要给它们留下任何重要的东西。"
     },
 ]
