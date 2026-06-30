@@ -51,6 +51,7 @@ BOSS_NAMES = {
     "SORTIE_BOSS_HEK": "韦•海克议员",
     "SORTIE_BOSS_HYENA": "Hyena（缺翻译）",
     "SORTIE_BOSS_KELA": "Kela De Thaym",
+    "SORTIE_BOSS_KRIL": "Lech Kril中尉",
     "SORTIE_BOSS_LEPHANTIS": "雷凡魔像",
     "SORTIE_BOSS_NEF": "奈富安尤",
     "SORTIE_BOSS_PHORID": "Phorid",

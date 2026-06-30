@@ -472,9 +472,9 @@ NODE_METADATA = {
     "SolNode31": {
         "name": "Anthe",
         "planet": "土星",
-        # "faction": "Grineer",
-        # "level": "21-23",
-        # "hardlevel": "121-123",
+        "faction": "Grineer",
+        "level": "27-29",
+        "hardlevel": "127-129",
         "mission": "救援"
     },
     "SolNode32": {
